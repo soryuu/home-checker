@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-  <div class="container">
+  <div class="inner-wrapper">
     <div class="content-wrapper">
       <div class="input-tile">
         <h1>Введите адрес или кадастровый номер</h1>
@@ -8,8 +8,8 @@
       <div class="input-block">
         <multiselect
           v-model="value"
-          track-by="value"
-          label="value"
+          track-by="address"
+          label="address"
           :options="options"
           :searchable="true"
           :close-on-select="true"
@@ -18,10 +18,31 @@
           :internal-search="false"
           @search-change="asyncFind"
         />
-        <button class="button--green input-block__search">
+        <button class="button--green input-block__search" @click="handleSearch">
           Найти объект
         </button>
       </div>
+      <v-simple-table v-if="results.length">
+        <thead>
+          <tr>
+            <th class="text-left">
+              Кадастровый номер
+            </th>
+            <th class="text-left">
+              Адрес
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in results" :key="item.egrn">
+            <td>{{ item.egrn }}</td>
+            <td>{{ item.address }}</td>
+            <nuxt-link v-if="item.egrn" :to="'/kadastr/' + prepareEgrn.toQs(item.egrn)">
+              Выбрать >
+            </nuxt-link>
+          </tr>
+        </tbody>
+      </v-simple-table>
     </div>
   </div>
 </template>
@@ -29,6 +50,8 @@
 <script>
 import Multiselect from 'vue-multiselect'
 import axios from 'axios'
+import * as __ from 'lodash'
+import { prepareEgrn } from '@/libs/helpers'
 
 export default {
   components: {
@@ -38,24 +61,30 @@ export default {
     return {
       value: null,
       options: [],
-      isLoading: false
+      isLoading: false,
+      results: [],
+      prepareEgrn
     }
   },
   methods: {
-    asyncFind (query) {
+    asyncFind: __.debounce(function (query) {
       this.isLoading = true
-      axios.post('/api/kladr', { query }).then((response) => {
-        this.options = response.data.suggestions || []
-        this.isLoading = false
+      axios.post('/api/rosreestr/hint', { query }).then(({ data }) => {
+        this.isLoading = true
+        this.options = data.items
       })
+    }, 2000),
+    handleSearch () {
+      axios
+        .post('/api/rosreestr/search', { query: this.value })
+        .then(({ data }) => { this.results = data.items })
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "vue-select/src/scss/vue-select.scss";
-.container {
+.inner-wrapper {
   padding: 50px;
   display: flex;
   justify-content: center;
@@ -93,8 +122,8 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;

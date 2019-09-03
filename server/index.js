@@ -1,33 +1,39 @@
 const express = require('express')
 const consola = require('consola')
-const axios = require('axios')
 const bodyParser = require('body-parser')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-
-const API_KEY = '3d5ad0ad1c2071c0873926dc5d6535d26fb759ad'
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
+const routes = require('./routes')
+
 async function start () {
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-  app.post('/api/kladr', (req, res) => {
-    axios({
-      method: 'POST',
-      url: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address',
-      headers: {
-        "Authorization": `Token ${API_KEY}`,
-        "Content-Type": "application/json",
-        "responseType": "json"
-      },
-      data: {
-        query: req.body.query
-      }
-    }).then(({ data }) => res.send(data))
-  })
+  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.json())
+
+  app.use(routes)
+  app.use('/api', routes)
+
+  // app.post('/api/hint', (req, res) => {
+  //   axios.get('https://rosreestr.net/api/method/database.hint', {
+  //     params: {
+  //       request: req.body.query,
+  //       access_token: API_KEY,
+  //       v: '1.0'
+  //     }
+  //   })
+  //     .then(({ data }) => {
+  //       const { response } = data
+  //       if (!response) {
+  //         res.send({ count: 0, items: [] })
+  //       }
+  //       return res.send(response.data)
+  //     })
+  //     .catch(err => console.error('HINT_ERROR --> ', err))
+  // })
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
