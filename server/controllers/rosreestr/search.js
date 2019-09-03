@@ -16,7 +16,7 @@ const search = (req, res, API_KEY) => {
       }
       res.send(response.data)
     })
-    .catch(err => console.error('SEARCH_ERROR --> ', err))
+    .catch((err) => console.error('SEARCH_ERROR --> ', err))
 }
 
 module.exports = search

@@ -16,7 +16,7 @@ const hint = (req, res, API_KEY) => {
       }
       return res.send(response.data)
     })
-    .catch(err => console.error('HINT_ERROR --> ', err))
+    .catch((err) => console.error('HINT_ERROR --> ', err))
 }
 
 module.exports = hint

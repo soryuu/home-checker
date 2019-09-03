@@ -16,7 +16,7 @@ const getByEgrn = (req, res, API_KEY) => {
       }
       return res.send(response.data)
     })
-    .catch(err => console.error('GET_ERROR --> ', err))
+    .catch((err) => console.error('GET_ERROR --> ', err))
 }
 
 module.exports = getByEgrn
