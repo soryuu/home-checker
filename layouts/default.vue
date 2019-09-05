@@ -1,14 +1,18 @@
 <template>
   <div>
     <Header />
-    <nuxt />
+    <div class="main-wrapper">
+      <nuxt />
+    </div>
   </div>
 </template>
 
+<style lang="sass">
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic')
+</style>
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -29,14 +33,14 @@ html {
   display: inline-block;
   color: #fff;
   border-radius: 4px;
-  border: 1px solid #f57c00;
+  border: 1px solid #F85B29;
   text-decoration: none;
   padding: 10px 30px;
-  background-color: #f57c00;
+  background-color: #F85B29;
 }
 
 .button--green:hover {
-  color: #f57c00;
+  color: #F85B29;
   background-color: #fff;
 }
 
@@ -53,6 +57,9 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+.main-wrapper {
+  background-color: #f7f8f8;
 }
 </style>
 

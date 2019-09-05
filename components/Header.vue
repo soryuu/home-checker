@@ -6,16 +6,19 @@
     <div class="nav-block">
       <ul class="nav-bar">
         <li class="nav-bar__link">
-          Проверить
+          О нас
         </li>
         <li class="nav-bar__link">
-          Как работает
+          Тарифы
         </li>
         <li class="nav-bar__link">
-          Наша команда
+          Вопросы
         </li>
         <li class="nav-bar__link">
-          FAQ
+          Партнеры
+        </li>
+        <li class="nav-bar__link">
+          Отзывы
         </li>
       </ul>
     </div>
@@ -25,27 +28,31 @@
 <style lang="scss">
 .wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fafafa;
-    .logo-block {
-        position: relative;
-        &__image {
-            width: 30%;
-        }
-    }
-    .nav-block {
-        position: relative;
-        width: 50%;
-        .nav-bar {
-            padding: 0;
-            display: flex;
-            &__link {
-                list-style-type: none;
-                margin: 0 15px;
-                cursor: pointer;
-            }
-        }
-    }
+    padding: 20px 40px;
+    background: #ccdced;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #014EA6;
+    font-weight: bold;
+    font-size: 15px;
+      .logo-block {
+          position: relative;
+          &__image {
+              width: 100%;
+          }
+      }
+      .nav-block {
+          position: relative;
+          .nav-bar {
+              padding: 0;
+              display: flex;
+              margin-bottom: 2px;
+              &__link {
+                  list-style-type: none;
+                  margin: 0 20px;
+                  cursor: pointer;
+              }
+          }
+      }
 }
 </style>

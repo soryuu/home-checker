@@ -1,0 +1,70 @@
+{
+    "main": {
+        "egrn": "61:44:0082021:521",
+        "status": 1,
+        "date_update": 1567524419
+    },
+    "common": {
+        "type": {
+            "id": 9,
+            "title": "квартира"
+        },
+        "doc_type": "Квартира, Жилое помещение",
+        "status": {
+            "id": 4,
+            "title": "ранее учтенный"
+        },
+        "region": {
+            "id": 61,
+            "title": "Ростовская область"
+        },
+        "postcode": "344018",
+        "address": "ул Козлова , д. 65В , кв.42 , Ростовская обл , г Ростов-на-Дону",
+        "address_docs": "Россия, Ростовская обл., г. Ростов-на-Дону, Октябрьский район, ул. Козлова, дом №65в, кв. 42",
+        "floor": "10",
+        "area": {
+            "okei": {
+                "code": "055",
+                "title": "м2 (квадратный метр)"
+            },
+            "value": 100
+        },
+        "type_ownership": null,
+        "date_registration": 1386118800,
+        "date_inform_update": 1554861600
+    },
+    "land": {
+        "category": {
+            "cadastral_code": null,
+            "value": null
+        },
+        "permitted_use": {
+            "cadastral_code": null,
+            "value": null
+        },
+        "doc_information": null,
+        "cadastral_engineer": null,
+        "date_gkn_update": null,
+        "date_gkn_unloading": null
+    },
+    "cadastre": {
+        "area": {
+            "id": 1956,
+            "title": "Ростов-на-Дону  кадастровый район"
+        },
+        "cost": 6171724,
+        "date_cost_identify": 1545184800,
+        "date_cost_add": 1554861600,
+        "date_cost_approval": null,
+        "preliminary_tax": 6171.72
+    },
+    "notes": [],
+    "owners": [
+        {
+            "number": "61-61-01/379/2008-171",
+            "type": "собственность",
+            "date": 1215997200
+        }
+    ],
+    "restrictions": []
+}
