@@ -51,6 +51,7 @@
         </tbody>
       </v-simple-table>
     </div>
+    <MainInfo />
   </div>
 </template>
 
@@ -58,11 +59,13 @@
 import Multiselect from 'vue-multiselect'
 import axios from 'axios'
 import * as __ from 'lodash'
+import MainInfo from '~/components/MainPage/MainInfo'
 import { prepareEgrn } from '@/libs/helpers'
 
 export default {
   components: {
-    Multiselect
+    Multiselect,
+    MainInfo
   },
   data () {
     return {
@@ -104,9 +107,6 @@ export default {
     .input-tile {
       color: #014EA6;
       text-align: left;
-      h1 {
-        font-size: 40px;
-      }
     }
     .input-block {
       margin: 70px 0;
