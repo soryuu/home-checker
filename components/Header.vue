@@ -29,7 +29,8 @@
 .wrapper {
     display: flex;
     padding: 20px 40px;
-    background: #ccdced;
+    background: #fff;
+    box-shadow: 0px 0px 20px rgba(1, 78, 166, 0.2);
     justify-content: space-between;
     align-items: flex-end;
     color: #014EA6;

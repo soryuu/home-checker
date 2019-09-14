@@ -12,9 +12,13 @@
             track-by="address"
             class="multiselect"
             label="address"
+            :preserve-search="true"
             :options="options"
             :searchable="true"
+            :allow-empty="false"
+            open-direction="bottom"
             :close-on-select="true"
+            :clear-on-select="false"
             :show-labels="false"
             placeholder="Введите адрес или кадастровый номер"
             :internal-search="false"
@@ -85,9 +89,12 @@ export default {
       })
     }, 2000),
     handleSearch () {
+      console.log(this.value)
       axios
         .post('/api/rosreestr/search', { query: this.value })
-        .then(({ data }) => { this.results = data.items })
+        .then(({ data }) => {
+          this.results = data.items
+        })
     }
   }
 }
@@ -114,10 +121,64 @@ export default {
       font-size: 20px;
       .multiselect {
         position: relative;
+        .multiselect__option {
+          padding: 10px 40px;
+          font-size: 20px;
+        }
+        .multiselect__option--highlight {
+          background: #F2F6FB;
+          color: #000;
+          font-weight: 500;
+        }
+        &.multiselect--active {
+          position: relative;
+          .multiselect__tags::before {
+            content: url(/img/map-icon.png);
+            position: absolute;
+            left: 45px;
+          }
+          .multiselect__tags::after {
+            content: 'Выберите из списка или продолжите ввод';
+            margin-left: -50px;
+            margin-top: 35px;
+            display: block;
+            color: #646464;
+          }
+          .multiselect__tags {
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            font-size: 22px;
+            padding-bottom: 15px;
+            .multiselect__input {
+              margin-bottom: 0;
+              font-size: 20px;
+            }
+            .multiselect__input::placeholder {
+              display: none;
+              position: absolute;
+              font-size: 12px;
+              top: 0px;
+              left: 20px;
+              margin-bottom: 20px;
+            }
+          }
+          .multiselect__content-wrapper {
+            margin-top: -5px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+          }
+        }
         &__tags {
           font-size: 20px;
           border-radius: 40px;
-          padding: 27px 20px 27px 50px;
+          padding: 27px 20px 27px 90px;
+          ::before {
+            content: url(/img/map-icon.png);
+            position: absolute;
+            left: 45px;
+          }
         }
         &__placeholder {
           margin-bottom: 0;
@@ -133,7 +194,7 @@ export default {
         width: 200px;
         border-radius: 35px;
         margin-left: -210px;
-        z-index: 1;
+        z-index: 51;
         margin-top: 10px;
         cursor: pointer;
       }
