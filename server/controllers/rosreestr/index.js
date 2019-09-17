@@ -11,9 +11,9 @@ const generateError = ({ res }) => {
 const rosreestr = (req, res, next) => {
   switch (req.params.type) {
     case 'hint':
-      return hint(req, res, API_KEY)
+      return hint(req, res)
     case 'search':
-      return search(req, res, API_KEY)
+      return search(req, res)
     case 'getByEgrn':
       return getByEgrn(req, res, API_KEY)
 

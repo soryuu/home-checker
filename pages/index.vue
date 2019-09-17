@@ -9,9 +9,9 @@
         <div class="input-block">
           <multiselect
             v-model="value"
-            track-by="address"
+            track-by="value"
             class="multiselect"
-            label="address"
+            label="value"
             :preserve-search="true"
             :options="options"
             :searchable="true"
@@ -23,6 +23,7 @@
             placeholder="Введите адрес или кадастровый номер"
             :internal-search="false"
             @search-change="asyncFind"
+            @select="handleSelect"
           />
           <button class="button--green input-block__search" @click="handleSearch">
             Найти >
@@ -77,24 +78,26 @@ export default {
       options: [],
       isLoading: false,
       results: [],
-      prepareEgrn
+      prepareEgrn,
+      selected: null
     }
   },
   methods: {
     asyncFind: __.debounce(function (query) {
       this.isLoading = true
       axios.post('/api/rosreestr/hint', { query }).then(({ data }) => {
-        this.isLoading = true
-        this.options = data.items
+        this.options = data
       })
     }, 2000),
-    handleSearch () {
-      console.log(this.value)
+    handleSearch (e) {
+      e.preventDefault()
       axios
-        .post('/api/rosreestr/search', { query: this.value })
-        .then(({ data }) => {
-          this.results = data.items
-        })
+        .post('/api/rosreestr/search', { data: this.selected })
+        .then((res) => console.log('123', res))
+    },
+    handleSelect (query) {
+      console.log(query.data)
+      this.selected = query.data
     }
   }
 }

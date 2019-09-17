@@ -1,22 +1,17 @@
 const axios = require('axios')
+const { DADATA_API_KEY } = require('../../constants')
 
-const hint = (req, res, API_KEY) => {
-  axios
-    .get('https://rosreestr.net/api/method/database.hint', {
-      params: {
-        request: req.body.query,
-        access_token: API_KEY,
-        v: '1.0'
-      }
-    })
-    .then(({ data }) => {
-      const { response } = data
-      if (!response) {
-        res.send({ count: 0, items: [] })
-      }
-      return res.send(response.data)
-    })
-    .catch((err) => console.error('HINT_ERROR --> ', err))
+const hint = (req, res) => {
+  axios({
+    method: 'POST',
+    url: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address',
+    headers: {
+      'Authorization': `Token ${DADATA_API_KEY}`
+    },
+    data: {
+      query: req.body.query
+    }
+  }).then(({ data: { suggestions } }) => res.send(suggestions))
 }
 
 module.exports = hint
