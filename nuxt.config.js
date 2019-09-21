@@ -30,13 +30,6 @@ module.exports = {
   plugins: [
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
-  ],
-  /*
   ** Nuxt.js modules
   */
   modules: [
@@ -44,7 +37,6 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
   ],
-  devModules: ['@nuxtjs/eslint-module'],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
